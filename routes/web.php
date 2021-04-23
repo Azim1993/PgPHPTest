@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('users', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show.by.query');
 Route::get('users/{userID}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show.by.params');
+Route::post('users', [\App\Http\Controllers\UserController::class, 'storeComments'])->name('user.comment.store');

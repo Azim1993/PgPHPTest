@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,11 @@ class UserController extends Controller
         $user = User::findOrFail($userID);
 
         return view('welcome', compact('user'));
+    }
+
+    public function storeComments(CommentStoreRequest $request)
+    {
+        
     }
 
 }
