@@ -30,11 +30,10 @@ class UserCommentByArtisanCommandTest extends TestCase
     public function test_succesfully_store_comment_by_commands()
     {
         $user = User::factory()->create();
-        $response = Artisan::call('user:comments', [
+        $this->artisan('user:comments', [
             'USER_ID' => $user->id,
             'COMMENT' => $this->faker->sentence(2)
-        ]);
-
-        $this->assertEquals(1, $response);
+        ])
+        ->assertExitCode(1);
     }
 }
