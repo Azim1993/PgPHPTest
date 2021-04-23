@@ -40,4 +40,11 @@ class UserTest extends TestCase
         $response->assertViewHas('user', $user);
     }
 
+    public function test_invalid_userid()
+    {
+        $response = $this->get("/users/123");
+
+        $response->assertNotFound();
+    }
+
 }
