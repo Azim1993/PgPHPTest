@@ -40,9 +40,16 @@ class UserCommentStoreCommand extends Command
     public function handle()
     {
         $user = User::findOrFail($this->argument('USER_ID'));
+
         $isCommentStored = resolve(UserController::class)
             ->storeCommentBy($user, $this->argument('COMMENT'));
-        $isCommentStored ? $this->info('Success') : $this->error('failed');
+
+        if ($isCommentStored) {
+            $this->info('Success');
+            return true;
+        }
+
+        $this->error('failed');
         return 0;
     }
 }
