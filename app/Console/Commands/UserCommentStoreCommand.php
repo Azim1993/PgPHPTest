@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class UserCommentStoreCommand extends Command
@@ -11,14 +13,14 @@ class UserCommentStoreCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'user:comments {USER_ID} {COMMENT}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'To store user comment';
 
     /**
      * Create a new command instance.
@@ -37,6 +39,10 @@ class UserCommentStoreCommand extends Command
      */
     public function handle()
     {
+        $user = User::findOrFail($this->argument('USER_ID'));
+        $isCommentStored = resolve(UserController::class)
+            ->storeCommentBy($user, $this->argument('COMMENT'));
+        $isCommentStored ? $this->info('Success') : $this->error('failed');
         return 0;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -27,9 +28,16 @@ class UserController extends Controller
     public function storeComments(CommentStoreRequest $request)
     {
         $user = User::find($request->id);
-        $user->comments .= "\n {$request->comments}";
-        $user->save();
-        return response()->json('User Comment store successfully');
+
+        if ($this->storeCommentBy($user, $request->comments))
+            return response()->json('User Comment store successfully');
+        return response()
+            ->status(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    public function storeCommentBy(User $user, string $comment): bool
+    {
+        $user->comments .= "\n {$comment}";
+        return $user->save();
+    }
 }
