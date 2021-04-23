@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = (object) [
+        'id' => 1,
+        'name' => 'test user',
+        'comments' => 'test comments \n another comments'
+    ];
+    return view('welcome', compact('user'));
 });
