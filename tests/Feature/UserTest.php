@@ -22,4 +22,13 @@ class UserTest extends TestCase
         $response->assertSessionHas('warning');
     }
 
+    public function test_get_user_detail_as_param_pass()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->get("/users/{$user->id}");
+
+        $response->assertViewHas('user', $user);
+    }
+
 }
