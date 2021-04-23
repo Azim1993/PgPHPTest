@@ -26,7 +26,10 @@ class UserController extends Controller
 
     public function storeComments(CommentStoreRequest $request)
     {
-        
+        $user = User::find($request->id);
+        $user->comments .= "\n {$request->comments}";
+        $user->save();
+        return response()->json('User Comment store successfully');
     }
 
 }
