@@ -14,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $user = (object) [
-        'id' => 1,
-        'name' => 'test user',
-        'comments' => 'test comments \n another comments'
-    ];
-    return view('welcome', compact('user'));
+    return redirect()->route('user.show.by.query');
 });
+
+Route::get('users', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show.by.query');
+Route::get('users/{userID}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show.by.params');
