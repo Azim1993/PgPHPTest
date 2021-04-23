@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>User Card - {{ $user->name }}</title>
+    <title>User Card - {{ $user->name ?? '' }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
@@ -10,11 +10,15 @@
 <body class="is-preload">
 <div id="wrapper">
     <section id="main">
+        @if(session()->has('warning'))
+            <h3>{{ session()->get('warning') }}</h3>
+        @else
         <header>
-            <span class="avatar"><img src="{{asset("images/users/{$user->id}.jpg")}}" alt="" /></span>
-            <h1>{{ $user->name }}</h1>
-            <p> {!! $user->comments !!}</p>
+            <span class="avatar"><img src="{{asset("images/users/". optional($user)->id . ".jpg")}}" alt="" /></span>
+            <h1>{{ optional($user)->name }}</h1>
+            <p> {!! optional($user)->comments !!}</p>
         </header>
+        @endif
     </section>
     <footer id="footer">
         <ul class="copyright">
