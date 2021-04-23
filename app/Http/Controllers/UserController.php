@@ -21,7 +21,7 @@ class UserController extends Controller
         $userID = $userID ?? $request->id;
 
         $user = User::findOrFail($userID);
-        
+
         return view('welcome', compact('user'));
     }
 
@@ -37,6 +37,8 @@ class UserController extends Controller
 
     public function storeCommentBy(User $user, string $comment): bool
     {
+        if (empty($comment)) return false;
+
         $user->comments .= "\n {$comment}";
         return $user->save();
     }

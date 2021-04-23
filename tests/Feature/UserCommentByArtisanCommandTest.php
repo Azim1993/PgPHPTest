@@ -36,4 +36,14 @@ class UserCommentByArtisanCommandTest extends TestCase
         ])
         ->assertExitCode(1);
     }
+
+    public function test_fail_comment_by_commands()
+    {
+        $user = User::factory()->create();
+        $this->artisan('user:comments', [
+            'USER_ID' => $user->id,
+            'COMMENT' => ''
+        ])
+        ->assertExitCode(0);
+    }
 }
