@@ -21,7 +21,7 @@ class UserController extends Controller
         $userID = $userID ?? $request->id;
 
         $user = User::findOrFail($userID);
-
+        
         return view('welcome', compact('user'));
     }
 

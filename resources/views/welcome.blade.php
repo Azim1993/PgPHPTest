@@ -14,7 +14,7 @@
             <h3>{{ session()->get('warning') }}</h3>
         @else
         <header>
-            <span class="avatar"><img src="{{asset("images/users/". optional($user)->id . ".jpg")}}" alt="" /></span>
+            <span class="avatar"><img src="{{asset("images/users/". optional($user)->avater )}}" alt="" /></span>
             <h1>{{ optional($user)->name }}</h1>
             <p> {!! optional($user)->comments !!}</p>
         </header>

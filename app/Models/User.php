@@ -19,5 +19,13 @@ class User extends Model
         'comments'
     ];
 
+    protected $appends = ['avater'];
+
     public $timestamps = false;
+
+
+    public function getAvaterAttribute()
+    {
+        return $this->id < 3 ? $this->id . '.jpg' : rand(1,2) . '.jpg';
+    }
 }
