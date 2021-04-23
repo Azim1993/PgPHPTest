@@ -31,4 +31,13 @@ class UserTest extends TestCase
         $response->assertViewHas('user', $user);
     }
 
+    public function test_get_user_detail_as_query_pass()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->get("/users?id={$user->id}");
+
+        $response->assertViewHas('user', $user);
+    }
+
 }
