@@ -38,4 +38,18 @@ class UserCommentTest extends TestCase
 
         $response->assertForbidden();
     }
+
+    public function test_invalid_userid_validation()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->postJson('/user/comments', [
+            'id' => $user->id + 1,
+            'password' => config('enums.auth_pass'),
+            'comments' => $this->faker->sentence()
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['id']);
+    }
 }
