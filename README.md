@@ -1,4 +1,4 @@
-#PG PHP TEST
+# PG PHP TEST
 This is a simple laravel test project. First we can create user list by seeder. By passing user id in route query or params we can see user detail with comments. Finally, We can create user comment from laravel artisan command.
 
 ## Installation Process
@@ -43,7 +43,7 @@ Bellow all routes detail are provided:
 **Params** : ```userID``` <br>
 **URL** : ```{{base_url}}/users/{userID}```
 
-### 2. Create user comment
+### 3. Create user comment
 **Method** : `POST` <br>
 **Is Password Required** : `YES` <br>
 **Query** : <br>
