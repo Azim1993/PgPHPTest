@@ -52,4 +52,18 @@ class UserCommentTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['id']);
     }
+
+    public function test_required_comments_validation()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->postJson('/user/comments', [
+            'id' => $user->id,
+            'password' => config('enums.auth_pass'),
+            'comments' => null
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['comments']);
+    }
 }
